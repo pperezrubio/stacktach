@@ -1,26 +1,6 @@
 # Django settings for StackTach project.
 import os
 
-try:
-    from local_settings import *
-
-    db_engine = STACKTACH_DB_ENGINE
-    db_name = STACKTACH_DB_NAME
-    db_host = STACKTACH_DB_HOST
-    db_username = STACKTACH_DB_USERNAME
-    db_password = STACKTACH_DB_PASSWORD
-    db_port = STACKTACH_DB_PORT
-    install_dir = STACKTACH_INSTALL_DIR
-except ImportError:
-    db_engine = os.environ.get('STACKTACH_DB_ENGINE',
-                               'django.db.backends.mysql')
-    db_name = os.environ['STACKTACH_DB_NAME']
-    db_host = os.environ.get('STACKTACH_DB_HOST', "")
-    db_username = os.environ['STACKTACH_DB_USERNAME']
-    db_password = os.environ['STACKTACH_DB_PASSWORD']
-    db_port = os.environ.get('STACKTACH_DB_PORT', "")
-    install_dir = os.environ['STACKTACH_INSTALL_DIR']
-
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -29,17 +9,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': db_engine,
-        'NAME': db_name,
-        'USER': db_username,
-        'PASSWORD': db_password,
-        'HOST': db_host,    # Set to empty string for localhost.
-        'PORT': db_port,    # Set to empty string for default.
-    }
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -87,6 +56,8 @@ STATIC_URL = '/static/'
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 #ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+install_dir = '/usr/share/stacktach'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -166,3 +137,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from local.local_settings import *
+except ImportError:
+    logging.warning("No local_settings file found.")
