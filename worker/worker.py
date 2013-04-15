@@ -21,6 +21,8 @@ import kombu
 import kombu.entity
 import kombu.mixins
 import logging
+import logging.config
+import os
 import sys
 import time
 
@@ -36,10 +38,12 @@ from pympler.process import ProcessMemoryInfo
 
 from stacktach import db, views
 
+log_filename = os.environ.get('STACKTACH_LOG_FILE',
+                              '/var/log/stachtach/worker.log')
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.DEBUG)
-handler = logging.handlers.TimedRotatingFileHandler('worker.log',
+handler = logging.handlers.TimedRotatingFileHandler(log_filename,
                                            when='h', interval=6, backupCount=4)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
