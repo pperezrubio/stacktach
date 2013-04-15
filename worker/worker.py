@@ -39,7 +39,7 @@ from pympler.process import ProcessMemoryInfo
 from stacktach import db, views
 
 log_filename = os.environ.get('STACKTACH_LOG_FILE',
-                              '/var/log/stachtach/worker.log')
+                              '/var/log/stacktach/worker.log')
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.DEBUG)
