@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import signal
@@ -35,10 +36,13 @@ def kill_time(signal, frame):
 
 
 if __name__ == '__main__':
-    config = None
-    with open(config_filename, "r") as f:
-        config = json.load(f)
+    parser = argparse.ArgumentParser(description='Stacktach worker.')
 
+    parser.add_argument('-f', '--deployments', type=file, default=config_filename) 
+
+    args = vars(parser.parse_args())
+
+    config = json.load(args['deployments'])
     deployments = config['deployments']
 
     for deployment in deployments:
