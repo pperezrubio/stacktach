@@ -57,7 +57,7 @@ STATIC_URL = '/static/'
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 #ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-install_dir = '/usr/share/stacktach'
+install_dir = '/usr/share/stacktach/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
